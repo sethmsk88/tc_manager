@@ -29,7 +29,6 @@
 			echo "Query failed: (" . $conn->errno . ") " . $conn->error;
 		}
 		else{
-			//dumpQuery($qry_events); // DEBUGGING
 			$qry_events_col_names = $qry_events->fetch_fields();
 			$qry_events_results = $qry_events->fetch_all();
 		}
@@ -74,42 +73,38 @@
 						else{
 							$rowClass = "info";
 						}
-
-						echo '<tr class="' . $rowClass . '">';
-							echo '<td>' . $row['Name'] . '</td>';
-							echo '<td>' . date('m/d/Y', strtotime($row['EventDate'])) . '</td>';
-							echo '<td>' . date('g:ia', strtotime($row['TimeBegin'])) . ' - ' . date('g:ia', strtotime($row['TimeEnd'])) .'</td>';
-							echo '<td>' . $row['Location'] . '</td>';
-							echo '<td>' . $row['Instructor'] . '</td>';
-							echo '<td>' . $row['InstructorTitle'] . '</td>';
-							echo '<td>' . $row['Description'] . '</td>';
-							echo '<td class="center">';
-								echo '<button ' .
-										'id="edit_' . $row['EventID'] . '" ' .
-										'type="button" ' .
-										'class="edit_button btn btn-default confirm" ' .
-										'style="margin-right:4px;" ' .
-										'data-toggle="confirmation" ' .
-										'>';
-									echo '<span class="edit_button glyphicon glyphicon-pencil"></span>';
-								echo '</button>';
-								echo '<button ' .
-										'id="del_' . $row['EventID'] . '" ' .
-										'type="button" ' .
-										'class="del_button btn btn-default" '.
-										'>';
-									echo '<span class="del_button glyphicon glyphicon-remove"></span>';
-								echo '</button>';
-							echo '</td>';
-						echo '</tr>';
+					?>
+						<tr class="<?php echo $rowClass; ?>">
+							<td><?php echo $row['Name']; ?></td>
+							<td><?php echo date('m/d/Y', strtotime($row['EventDate'])); ?></td>
+							<td><?php echo date('g:ia', strtotime($row['TimeBegin'])) . ' - ' . date('g:ia', strtotime($row['TimeEnd'])); ?></td>
+							<td><?php echo $row['Location']; ?></td>
+							<td><?php echo $row['Instructor']; ?></td>
+							<td><?php echo $row['InstructorTitle']; ?></td>
+							<td><?php echo $row['Description']; ?></td>
+							<td class="center">
+								<button
+									id="<?php echo 'edit_' . $row['EventID']; ?>"
+									type="button"
+									class="edit_button btn btn-default confirm"
+									style="margin-right:4px;"
+									data-toggle="confirmation"
+									>
+									<span class="edit_button glyphicon glyphicon-pencil"></span>
+								</button>
+								<button
+									id="<?php echo 'del_' . $row['EventID']; ?>"
+									type="button"
+									class="del_button btn btn-default"
+									>
+									<span class="del_button glyphicon glyphicon-remove"></span>
+								</button>
+							</td>
+						</tr>
 					}
 				?>
 				</tbody>
 			</table>
 		</div>
 	</div>
-
-	
-
 </div>
-
