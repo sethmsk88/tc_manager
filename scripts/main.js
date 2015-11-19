@@ -10,6 +10,6 @@ $(document).ready(function(){
 	/* Button Event Handlers */
 	/*************************/
 	$('#btn_goBack').on('click', function(e){
-		window.location = "./?page=manager";
+		window.location.href = "./?page=manager";
 	});
 });

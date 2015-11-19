@@ -2,9 +2,11 @@
 	/*** PAGE ACCESS RESTRICTION ***/
 	// If a valid EventID was not passed to this page as a GET variable, redirect to homepage
 	if ( !isset($_GET['id']) || !ctype_digit((string)$_GET['id'])){
-		echo '<script>';
-			echo 'window.location="?page=' . $homepage . '&err=noIDProvided"';
-		echo '</script>';
+?>
+		<script>
+			window.location.href = "?page=" + <?php echo $homepage; ?> +  "&err=noIDProvided";
+		</script>
+<?php
 	}
 	// Else if, id is less than 0; set to default id
 	else if ($_GET['id'] < 0){
