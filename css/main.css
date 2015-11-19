@@ -1,0 +1,31 @@
+tr.notDisplayed td{
+	color: #AAA;
+}
+
+td.center{
+	text-align:center;
+}
+
+.del_button{
+	color:red;
+	vertical-align: -1px;
+}
+
+span.edit_button{
+	color:#F27D00;
+	vertical-align: -1px;
+}
+
+h3.h3-1{
+	font-weight:bold;
+	color:#666;
+}
+
+.error{
+	color:red;
+}
+
+.eventsCalendar{
+	margin-top:30px;
+	margin-bottom:100px;
+}
