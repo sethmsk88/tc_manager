@@ -179,3 +179,9 @@
 		</div>
 	</div>
 </form>
+
+<div class="row">
+	<div id="ajax_response" class="col-lg-12">
+		<!-- To be filled with ajax error response text -->
+	</div>
+</div>

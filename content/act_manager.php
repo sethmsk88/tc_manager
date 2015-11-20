@@ -1,10 +1,6 @@
 <?php
-	// Output FORM Post Variables
-	/*
-	foreach ($_POST as $param_name => $param_val){
-		echo "Param: $param_name; Value: $param_val<br />";
-	}
-	*/
+	// Include my database info
+    include "../../shared/dbInfo.php";
 
 	// Connect to DB
 	$conn = mysqli_connect($dbInfo['dbIP'], $dbInfo['user'], $dbInfo['password'], $dbInfo['dbName']);
@@ -12,44 +8,61 @@
 		echo "Failed to connect to MySQL: (" . $conn->connect_errno . ") " . $conn->connect_error;
 	}
 
+	$param_str_EventDate = date('Y-m-d', strtotime($_POST['eventDate']));
+	$param_str_Name = $conn->escape_string(trim($_POST['eventName']));
+	$param_str_TimeBegin = date('H:i:s', strtotime($_POST['startTime']));
+	$param_str_TimeEnd = date('H:i:s', strtotime($_POST['endTime']));
+	$param_str_Location = $conn->escape_string(trim($_POST['location']));
+	$param_str_Instructor = $conn->escape_string(trim($_POST['instructor']));
+	$param_str_InstructorTitle = $conn->escape_string(trim($_POST['instructorTitle']));
+	$param_str_Description = $conn->escape_string(trim($_POST['description']));
+	$param_int_Active = 1; // true
 
 	// Insert Event info into table
-	$sql = "INSERT INTO $eventTable (EventDate, Name, TimeBegin, TimeEnd, Location, Instructor, InstructorTitle, Description, Active)" .
-		"VALUES ('" . date('Y-m-d', strtotime($_POST['eventDate'])) . "'," .
-			"'" . $conn->escape_string(trim($_POST['eventName'])) . "'," .
-			"'" . date('H:i:s', strtotime($_POST['startTime'])) . "'," .
-			"'" . date('H:i:s', strtotime($_POST['endTime'])) . "'," .
-			"'" . $conn->escape_string(trim($_POST['location'])) . "'," .
-			"'" . $conn->escape_string(trim($_POST['instructor'])) . "'," .
-			"'" . $conn->escape_string(trim($_POST['instructorTitle'])) . "'," .
-			"'" . $conn->escape_string(trim($_POST['description'])) . "'," .
-			"1" .
-			")";
+	$insert_event_sql = "
+		INSERT INTO tc_event (
+			EventDate,
+			Name,
+			TimeBegin,
+			TimeEnd,
+			Location,
+			Instructor,
+			InstructorTitle,
+			Description,
+			Active)
+		VALUES (?,?,?,?,?,?,?,?,?)
+	";
 
-	// Run Query
-	if ($conn->query($sql) === TRUE){
-		$qry_success = TRUE;
+	// Prepare stmt
+	if (!$stmt = $conn->prepare($insert_event_sql)) {
+		echo 'Prepare failed: (' . $conn->errno . ') ' . $conn->error;
 	}
-	else{
-		$qry_success = FALSE;
-		echo "Error executing query: " . $conn->error . "<br />";
+
+	// Bind params
+	if (!$stmt->bind_param("ssssssssi",
+			$param_str_EventDate,
+			$param_str_Name,
+			$param_str_TimeBegin,
+			$param_str_TimeEnd,
+			$param_str_Location,
+			$param_str_Instructor,
+			$param_str_InstructorTitle,
+			$param_str_Description,
+			$param_int_Active)
+		){
+		echo 'Binding params failed: (' . $stmt->errno . ') ' . $stmt->error;
 	}
+
+	// Execute query
+	if (!$stmt->execute()) {
+		echo 'Execute failed (' . $stmt->errno . ') ' . $stmt->error;
+	}
+	else {
+		echo '1'; // Success
+	}
+
+	$stmt->close();
 
 	// Close DB connection
 	mysqli_close($conn);
-
-
-	/*
-		If the event was successfully inserted into the DB, redirect;
-		else, display error message and do not redirect.
-	*/
-	if ($qry_success){
-		echo '<script>';
-			echo 'window.location = "?page=' . $homepage . '"';
-		echo '</script>';
-	}
-	else{
-		echo '<h3>There was an error adding the event. You can use your browser\' Back button to correct the error and submit again.</h3>';
-	}
 ?>
-

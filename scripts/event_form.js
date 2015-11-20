@@ -9,11 +9,20 @@ $(document).ready(function(){
 			url: formAction,
 			method: 'post',
 			data: $('#eventForm').serialize(),
+			dataType: 'json',
 			success: function(response) {
 				
-				// If an ID number was returned
-				if (!isNaN(response)) {
-					window.location.href = "?page=manager&edited=" + response;
+				// If action page executed successfully
+				if (response !== null) {
+					
+					if (response['action'] == 'error') {
+						
+						// Print error message
+						$('#ajax_response').text(response['message']);
+					}
+					else if (response['action'] == 'edit') {
+						window.location.href = "?page=manager&edited=" + response['id'];
+					}
 				}
 			}
 		});

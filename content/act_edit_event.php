@@ -55,11 +55,24 @@
 
 	// Execute query
 	if (!$stmt->execute()) {
-		echo 'Execute failed (' . $stmt->errno . ') ' . $stmt->error;
+
+		// Response
+		echo json_encode(
+			array(
+				'action'=>'error',
+				'message'=>'Execute failed (' . $stmt->errno . ') ' . $stmt->error
+			)
+		);
 	}
 	else {
-		// Query success
-		echo $_POST['eventID'];
+
+		// Response
+		echo json_encode(
+			array(
+				'action'=>'edit',
+				'id'=>$param_int_EventID
+			)
+		);
 	}
 
 	$stmt->close();
