@@ -13,33 +13,28 @@
 		$eventID = 0; // Default. Will cause no results to return.
 	}
 	else{
-		$eventID = (int)$_GET['id'];
+		$eventID = $_GET['id'];
 	}
 
-	// Query event info from DB
 	// Connect to DB
 	$conn = mysqli_connect($dbInfo['dbIP'], $dbInfo['user'], $dbInfo['password'], $dbInfo['dbName']);
 	if ($conn->connect_errno){
 		echo "Failed to connect to MySQL: (" . $conn->connect_errno . ") " . $conn->connect_error;
 	}
 
-
 	$sql = "
 		SELECT *
 		FROM $eventTable
-		WHERE EventID = $eventID";
+		WHERE EventID = $eventID
+	";
 
-	// Run Query
-	$qry_event = $conn->query($sql);
-
-	// Output query results
-	if (!$qry_event){
+	// Run query
+	if (!$qry_event = $conn->query($sql)) {
 		echo "Query failed: (" . $conn->errno . ") " . $conn->error;
 	}
-	else{
-		//dumpQuery($qry_event); // DEBUGGING
-		$qry_event_col_names = getQryColNames($qry_event);
-		$qry_event_results = getQryResults($qry_event);
+	else {
+		// Get event info
+		$qry_event_row = $qry_event->fetch_assoc();
 	}
 
 	// Close DB connection
@@ -53,8 +48,11 @@
 
 	<?php
 
+		// Set the edit flag to tell the included page we are in edit mode
+		$editEvent = true;
+
 		// Set the form action for the included form below
-		$formAction = "./?page=act_edit_event";
+		$formAction = "./content/act_edit_event.php";
 		include "./content/inc_event_form.php";
 	?>
 </div>

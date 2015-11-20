@@ -1,24 +1,23 @@
 $(document).ready(function(){
 
-	// just for the demos, avoids form submit
-	/*
-	jQuery.validator.setDefaults({
-	  debug: true,  // Prevents form from submitting
-	  success: "valid"
-	});
+	$('#eventForm').on('submit', function(e){
+		e.preventDefault(); // Prevent submit
 
-	$('#eventForm').validate({
-		rules: {
-			eventName: {
-				required: true
-			}
-		}
-	});
-*/
-
-	$('#submit_eventForm').click(function(){
+		var formAction = e.currentTarget.action;
 		
-		$('#eventForm').submit();
+		$.ajax({
+			url: formAction,
+			method: 'post',
+			data: $('#eventForm').serialize(),
+			success: function(response) {
+				
+				// If an ID number was returned
+				if (!isNaN(response)) {
+					window.location.href = "?page=manager&edited=" + response;
+				}
+			}
+		});
+		
 
 	});
 

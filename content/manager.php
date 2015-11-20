@@ -28,10 +28,7 @@
 		if (!$qry_events){
 			echo "Query failed: (" . $conn->errno . ") " . $conn->error;
 		}
-		else{
-			$qry_events_col_names = $qry_events->fetch_fields();
-			$qry_events_results = $qry_events->fetch_all();
-		}
+		
 		// Close DB connection
 		mysqli_close($conn);
 	?>

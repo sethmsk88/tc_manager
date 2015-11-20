@@ -40,7 +40,7 @@
     <?php
 
         // Global Variables
-        $eventTable = "TC_Event";
+        $eventTable = "tc_event";
 
         // Include my database info
         include "../shared/dbInfo.php";

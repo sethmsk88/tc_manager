@@ -1,26 +1,16 @@
+<!--
+	This page is included by edit_event.php
+-->
+
 <script src="./scripts/event_form.js"></script>
 
 <?php
 
-	// Define form field value variables
-	$eventName = "";
-	$eventDate = "";
-	$startTime = "";
-	$endTime = "";
-	$location = "";
-	$instructor = "";
-	$instructorTitle = "";
-	$description = "";
-
 	// If editing an event
-	if (isset($qry_event)){
+	if (isset($editEvent) && $editEvent == true){
 
 		// Set eventID for update
 		$eventID = $_GET['id'];
-
-		// Get event info
-		$qry_event->data_seek(0); // Move result set iterator to start
-		$qry_event_row = $qry_event->fetch_assoc();
 
 		// Set form field value vars
 		$eventName = $qry_event_row['Name'];
@@ -31,6 +21,17 @@
 		$instructor = $qry_event_row['Instructor'];
 		$instructorTitle = $qry_event_row['InstructorTitle'];
 		$description = $qry_event_row['Description'];
+	}
+	else {
+		// Else, adding an event
+		$eventName = "";
+		$eventDate = "";
+		$startTime = "";
+		$endTime = "";
+		$location = "";
+		$instructor = "";
+		$instructorTitle = "";
+		$description = "";
 	}
 ?>
 
@@ -164,7 +165,13 @@
 
 	<div class="row">
 		<div class="form-group col-md-4">
-			<button id="submit_eventForm" type="submit" class="btn btn-lg btn-style1">Submit</button>
+			<input
+				type="submit"
+				id="submit_eventForm"
+				class="btn btn-md btn-primary"
+				value="Submit"
+				>
+			<!-- <button id="submit_eventForm" type="submit" class="btn btn-lg btn-style1">Submit</button> -->
 		</div>
 
 		<div class="col-md-offset-7 col-md-1">
