@@ -16,7 +16,7 @@
 	$param_str_Instructor = $conn->escape_string(trim($_POST['instructor']));
 	$param_str_InstructorTitle = $conn->escape_string(trim($_POST['instructorTitle']));
 	$param_str_Description = $conn->escape_string(trim($_POST['description']));
-	$param_int_Active = 1; // true
+	$param_int_Active = 1; // active
 
 	// Insert Event info into table
 	$insert_event_sql = "
@@ -55,10 +55,23 @@
 
 	// Execute query
 	if (!$stmt->execute()) {
-		echo 'Execute failed (' . $stmt->errno . ') ' . $stmt->error;
+
+		// Response
+		echo json_encode(
+			array(
+				'action'=>'error',
+				'message'=>'Execute failed (' . $stmt->errno . ') ' . $stmt->error
+			)
+		);
 	}
 	else {
-		echo '1'; // Success
+		// Response
+		echo json_encode(
+			array(
+				'action'=>'add',
+				'id'=>$stmt->insert_id
+			)
+		);
 	}
 
 	$stmt->close();

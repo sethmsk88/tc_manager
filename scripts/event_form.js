@@ -23,6 +23,9 @@ $(document).ready(function(){
 					else if (response['action'] == 'edit') {
 						window.location.href = "?page=manager&edited=" + response['id'];
 					}
+					else if (response['action'] == 'add') {
+						window.location.href = "?page=manager&added=" + response['id'];
+					}
 				}
 			}
 		});

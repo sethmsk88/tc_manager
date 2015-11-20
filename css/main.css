@@ -29,3 +29,34 @@ h3.h3-1{
 	margin-top:30px;
 	margin-bottom:100px;
 }
+
+table.eventsCalendar th:nth-child(1){
+	width:18%;
+}
+
+table.eventsCalendar th:nth-child(2){
+	width:auto;
+}
+
+table.eventsCalendar th:nth-child(3){
+	width:auto;
+	min-width:140px;
+}
+
+table.eventsCalendar th:nth-child(5){
+	width:8%;
+}
+
+table.eventsCalendar th:nth-child(4),
+table.eventsCalendar th:nth-child(6){
+	width:12%;
+}
+
+table.eventsCalendar th:nth-child(7){
+	width:20%;
+}
+
+table.eventsCalendar th:nth-child(8){
+	width:110px;
+	min-width:110px;
+}

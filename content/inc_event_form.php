@@ -47,11 +47,11 @@
 		type="hidden"
 		name="eventID"
 		id="eventID"
-		value="<?php echo $eventID; ?>"
+		value="<?php if(isset($eventID)){echo $eventID;} ?>"
 		>
 
 	<div class="row">
-		<div class="form-group col-md-4">
+		<div class="form-group col-md-6">
 			<label for="eventName" class="control-label">Event Name</label>
 			<input
 				type="text"
@@ -151,7 +151,7 @@
 	</div>
 	
 	<div class="row">
-		<div class="form-group col-md-4">
+		<div class="form-group col-md-8">
 			<label for="description" class="control-label">Description</label>
 			<textarea
 				name="description"
@@ -171,17 +171,12 @@
 				class="btn btn-md btn-primary"
 				value="Submit"
 				>
-			<!-- <button id="submit_eventForm" type="submit" class="btn btn-lg btn-style1">Submit</button> -->
-		</div>
-
-		<div class="col-md-offset-7 col-md-1">
-			<button id="btn_goBack" type="button" class="btn btn-lg btn-style1">Back</button>
 		</div>
 	</div>
 </form>
 
 <div class="row">
-	<div id="ajax_response" class="col-lg-12">
+	<div id="ajax_response" class="col-md-12">
 		<!-- To be filled with ajax error response text -->
 	</div>
 </div>

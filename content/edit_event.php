@@ -24,7 +24,7 @@
 
 	$sql = "
 		SELECT *
-		FROM $eventTable
+		FROM tc_event
 		WHERE EventID = $eventID
 	";
 

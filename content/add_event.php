@@ -5,7 +5,7 @@
 
 	<?php
 		// Set the form action for the included form below
-		$formAction = "./?page=act_manager";
+		$formAction = "./content/act_manager.php";
 		include "./content/inc_event_form.php";
 	?>
 </div>

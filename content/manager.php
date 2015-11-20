@@ -14,28 +14,33 @@
 			echo "Failed to connect to MySQL: (" . $conn->connect_errno . ") " . $conn->connect_error;
 		}
 
-		$sql = "
+		$select_events_sql = "
 			SELECT *
-			FROM $eventTable
-			WHERE Active = 1
+			FROM tc_event
+			WHERE Active = 1 AND
+				EventDate > NOW() - INTERVAL 1 WEEK
 			ORDER BY EventDate ASC
 			";
 
-		// Run Query
-		$qry_events = $conn->query($sql);
-
 		// Output query results
-		if (!$qry_events){
+		if (!$qry_events = $conn->query($select_events_sql)){
 			echo "Query failed: (" . $conn->errno . ") " . $conn->error;
 		}
 		
 		// Close DB connection
 		mysqli_close($conn);
 	?>
+
+	<!-- Response container for ajax requests -->
+	<div class="row">
+		<div id="ajax_response" class="col-lg-12">
+			<!-- To be filled with response messages from ajax requests -->
+		</div>
+	</div>
 	
 	<!-- Table showing all active events -->
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-lg-12">
 			<table class="eventsCalendar table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
