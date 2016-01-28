@@ -4,7 +4,7 @@ $(document).ready(function() {
 	/* Button Event Handlers */
 	/*************************/
 	$('#btn_addEvent').on('click', function(e){
-		window.location = "./?page=add_event";
+		window.location.href = "./?page=add_event";
 	});
 
 	$('button.edit_button').on('click', function(e){
