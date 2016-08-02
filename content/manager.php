@@ -1,3 +1,5 @@
+<link href="./css/manager.css" rel="stylesheet">
+
 <div class="container-fluid">
 
 	<div class="row">
