@@ -1,3 +1,5 @@
+<script src="./js/course_list.js"></script>
+
 <?php
 	// Get active events that are newer than one week in the past
 	$sel_events_sql = "
@@ -14,8 +16,7 @@
 	} else {
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($eid, $date, $courseName, $timeBegin, $timeEnd, $location,
-			$instructor, $instructorTitle, $descr);
+		$stmt->bind_result($eid, $date, $courseName, $timeBegin, $timeEnd, $location, $instructor, $instructorTitle, $descr);
 	}
 ?>
 
@@ -54,14 +55,14 @@
 			<td class="nowrap">
 				<button
 					type="button"
-					id="edit-<?= $id ?>"
-					class="edit-btn btn btn-warning">
+					id="edit-<?= $eid ?>"
+					class="action-btn btn btn-warning">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</button>
 				<button
 					type="button"
-					id="del-<?= $id ?>"
-					class="del-btn btn btn-danger">
+					id="del-<?= $eid ?>"
+					class="action-btn btn btn-danger">
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 			</td>

@@ -73,7 +73,11 @@
                 <!-- Nav Links -->
                 <ul class="nav navbar-nav">
                     <li id="homepage-link">
-                        <a id="navLink-homepage" href="./?page=<?=APP_HOMEPAGE?>">Homepage</a> 
+                        <a id="navLink-homepage" href="?page=<?=APP_HOMEPAGE?>">Homepage</a> 
+                    </li>
+                    <li>
+                        <a id="navLink-addCourse" href="?page=add_course">Add Course
+                        </a>
                     </li>
                 </ul>
             </div>
