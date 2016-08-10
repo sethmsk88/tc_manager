@@ -1,3 +1,5 @@
+<script src="./js/course_form.js"></script>
+
 <?php
 	// If editing a course, populate fields with event info
 	if (isset($_GET['eid'])) {
@@ -34,10 +36,12 @@
 ?>
 
 <form
-	name="editCourse-form"
+	name="course-form"
+	id="course-form"
+	class="cmxform"
 	role="form"
 	method="post"
-	action="">
+	action="?page=course_list">
 
 	<div class="row">
 		<div class="col-md-6 form-group">
@@ -115,6 +119,18 @@
 				value="<?= $instructorTitle ?>">
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-12 form-group">
+			<b>This course listing should appear in the listserv:</b>
+			<div class="radio">
+				<label for="listserv-no"><input type="radio" name="listserv" value="0"> No</label>
+			</div>
+			<div class="radio">
+				<label for="listserv-yes"><input type="radio" name="listserv" value="1"> Yes</label>
+			</div>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col-md-12 form-group">
 			<label for="descr">Description</label>

@@ -28,7 +28,8 @@
 
     <!-- Included Scripts -->
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/bootstrap/js/jquery-validation-1.13.1/dist/jquery.validate.js"></script>
+    <script src="/bootstrap/js/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
+    <script src="/bootstrap/js/jquery-validation-1.15.0/dist/additional-methods.min.js"></script>
     <script src="../../js/bootstrap-datepicker.min.js"></script>
     <script src="../../js/bootstrap-confirmation.js"></script>
     <script src="./js/main.js"></script>
