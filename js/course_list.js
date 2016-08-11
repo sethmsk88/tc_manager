@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	$('.action-btn').click(function(e) {
 		e.preventDefault();
 
@@ -11,19 +12,25 @@ $(document).ready(function() {
 			// redirect to edit course page
 			location.href = "?page=edit_course&eid=" + eid;
 		} else if (action == "del") {
-			// post the id to the action page
-			$.ajax({
-				url: './content/act_del_course.php',
-				method: 'post',
-				data: {
-					'eid': eid
-				},
-				success: function(response) {
-					alert(response);
-				}
-			});
+			// set the hidden input element in the delete action form
+			$('#_eid').val(eid);
 		}
-		// else if delete do something
+	});
 
+
+	$('#del-course-form').submit(function(e) {
+		e.preventDefault();
+
+		$form = $(this);
+
+		// post the id to the action page
+		$.ajax({
+			url: './content/act_del_course.php',
+			method: 'post',
+			data: $form.serialize(),
+			success: function(response) {
+				location.reload();
+			}
+		});
 	});
 });
