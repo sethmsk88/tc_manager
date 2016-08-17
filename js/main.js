@@ -1,5 +1,5 @@
-$(document).ready(function(){
-	
+$(document).ready(function() {
 	// Activate datepicker input fields
 	$('.datepicker').datepicker();
 });
+	
