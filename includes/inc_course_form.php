@@ -6,7 +6,7 @@
 		// Get event information for the eid url var
 		$sel_event_sql = "
 			SELECT EventDate, Name, TimeBegin, TimeEnd, Location,
-			Instructor, InstructorTitle, Description
+			Instructor, InstructorTitle, Description, Listserv
 			FROM hrodt.tc_event
 			WHERE EventID = ?
 				AND Active = 1
@@ -19,7 +19,7 @@
 			} else {
 				$stmt->execute();
 				$stmt->store_result();
-				$stmt->bind_result($date, $courseName, $timeBegin, $timeEnd, $location, $instructor, $instructorTitle, $descr);
+				$stmt->bind_result($date, $courseName, $timeBegin, $timeEnd, $location, $instructor, $instructorTitle, $descr, $listserv);
 				$stmt->fetch();
 			}
 		}
@@ -32,9 +32,10 @@
 		$instructor = "";
 		$instructorTitle = "";
 		$descr = "";
+		$listserv = "";
 	}
 
-	// Formatt date and times if they are not blank
+	// Formatted date and times if they are not blank
 	if ($date != "")
 		$formattedDate = date('m/d/Y', strtotime($date));
 	else
@@ -49,6 +50,14 @@
 		$formattedTimeEnd = date('g:ia', strtotime($timeEnd));
 	else
 		$formattedTimeEnd = $timeEnd;
+
+	$listserv_no_checked = "";
+	$listserv_yes_checked = "";
+
+	if ($listserv == 0)
+		$listserv_no_checked = 'checked="checked"';
+	else if ($listserv == 1)
+		$listserv_yes_checked = 'checked="checked"';
 ?>
 
 
@@ -140,10 +149,10 @@
 		<div class="col-md-12 form-group">
 			<b>This course listing should appear in the listserv:</b>
 			<div class="radio">
-				<label for="listserv-no"><input type="radio" name="listserv" value="0"> No</label>
+				<label for="listserv-no"><input type="radio" name="listserv" value="0" <?= $listserv_no_checked ?>> No</label>
 			</div>
 			<div class="radio">
-				<label for="listserv-yes"><input type="radio" name="listserv" value="1"> Yes</label>
+				<label for="listserv-yes"><input type="radio" name="listserv" value="1" <?= $listserv_yes_checked ?>> Yes</label>
 			</div>
 		</div>
 	</div>
