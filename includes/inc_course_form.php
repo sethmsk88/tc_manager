@@ -33,7 +33,24 @@
 		$instructorTitle = "";
 		$descr = "";
 	}
+
+	// Formatt date and times if they are not blank
+	if ($date != "")
+		$formattedDate = date('m/d/Y', strtotime($date));
+	else
+		$formattedDate = $date;
+
+	if ($timeBegin != "")
+		$formattedTimeBegin = date('g:ia', strtotime($timeBegin));
+	else
+		$formattedTimeBegin = $timeBegin;
+
+	if ($timeEnd != "")
+		$formattedTimeEnd = date('g:ia', strtotime($timeEnd));
+	else
+		$formattedTimeEnd = $timeEnd;
 ?>
+
 
 <form
 	name="course-form"
@@ -64,7 +81,7 @@
 				id="date"
 				class="form-control datepicker"
 				placeholder=" Event Date"
-				value="<?= date('m/d/Y', strtotime($date)) ?>">
+				value="<?= $formattedDate ?>">
 		</div>
 		<div class="col-md-4 form-group">
 			<label for="startTime">Start Time</label>
@@ -74,7 +91,7 @@
 				id="startTime"
 				class="form-control"
 				placeholder="e.g. 9:30am"
-				value="<?= date('g:ia', strtotime($timeBegin)) ?>">
+				value="<?= $formattedTimeEnd ?>">
 		</div>
 		<div class="col-md-4 form-group">
 			<label for="endTime">End Time</label>
@@ -84,7 +101,7 @@
 				id="endTime"
 				class="form-control"
 				placeholder="e.g. 12:00pm"
-				value="<?= date('g:ia', strtotime($timeEnd)) ?>">
+				value="<?= $formattedTimeEnd ?>">
 		</div>
 	</div>
 	<div class="row">
