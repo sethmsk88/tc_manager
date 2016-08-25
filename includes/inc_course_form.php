@@ -54,9 +54,9 @@
 	$listserv_no_checked = "";
 	$listserv_yes_checked = "";
 
-	if ($listserv == 0)
+	if ($listserv === 0)
 		$listserv_no_checked = 'checked="checked"';
-	else if ($listserv == 1)
+	else if ($listserv === 1)
 		$listserv_yes_checked = 'checked="checked"';
 ?>
 
