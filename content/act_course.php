@@ -12,25 +12,66 @@
 	$listserv = $_POST['listserv'];
 	$active = 1;
 
-	$ins_event_sql = "
-		INSERT INTO hrodt.tc_event (EventDate, Name, TimeBegin, TimeEnd, Location, Instructor, InstructorTitle, Description, Listserv, Active)
-		VALUES (?,?,?,?,?,?,?,?,?,?)
-	";
-	if (!$stmt = $conn->prepare($ins_event_sql)) {
-		echo 'Prepare failed: (' . $conn->errno . ') ' . $conn->error . '<br />';
+	// If URL var eid exists, UPDATE event, otherwise INSERT new event
+	if (isset($_POST['eid'])) {
+
+		// UPDATE existing event
+		$update_event_sql = "
+			UPDATE hrodt.tc_event
+			SET	EventDate = ?,
+				Name = ?,
+				TimeBegin = ?,
+				TimeEnd = ?,
+				Location = ?,
+				Instructor = ?,
+				InstructorTitle = ?,
+				Description = ?,
+				Listserv = ?
+			WHERE
+				EventID = ?
+		";
+
+		if (!$stmt = $conn->prepare($update_event_sql)) {
+			echo 'Prepare failed: (' . $conn->errno . ') ' . $conn->error . '<br />';
+		} else {
+			$stmt->bind_param("ssssssssii",
+				$date,
+				$courseName,
+				$startTime,
+				$endTime,
+				$location,
+				$instructor,
+				$instructorTitle,
+				$descr,
+				$listserv,
+				$_POST['eid']
+				);
+			$stmt->execute();
+		}
 	} else {
-		$stmt->bind_param("ssssssssii",
-			$date,
-			$courseName,
-			$startTime,
-			$endTime,
-			$location,
-			$instructor,
-			$instructorTitle,
-			$descr,
-			$listserv,
-			$active
-			);
-		$stmt->execute();
+
+		// INSERT new event
+		$ins_event_sql = "
+			INSERT INTO hrodt.tc_event (EventDate, Name, TimeBegin, TimeEnd, Location, Instructor, InstructorTitle, Description, Listserv, Active)
+			VALUES (?,?,?,?,?,?,?,?,?,?)
+		";
+		
+		if (!$stmt = $conn->prepare($ins_event_sql)) {
+			echo 'Prepare failed: (' . $conn->errno . ') ' . $conn->error . '<br />';
+		} else {
+			$stmt->bind_param("ssssssssii",
+				$date,
+				$courseName,
+				$startTime,
+				$endTime,
+				$location,
+				$instructor,
+				$instructorTitle,
+				$descr,
+				$listserv,
+				$active
+				);
+			$stmt->execute();
+		}
 	}
 ?>
