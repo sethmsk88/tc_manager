@@ -100,7 +100,7 @@
 				id="startTime"
 				class="form-control"
 				placeholder="e.g. 9:30am"
-				value="<?= $formattedTimeEnd ?>">
+				value="<?= $formattedTimeBegin ?>">
 		</div>
 		<div class="col-md-4 form-group">
 			<label for="endTime">End Time</label>
@@ -169,6 +169,16 @@
 				placeholder="Description"><?= $descr ?></textarea>
 		</div>
 	</div>
+
+	<?php if (isset($_GET['eid'])) { ?>
+		<input
+			name="eid"
+			id="eid"
+			type="hidden"
+			value="<?= $_GET['eid'] ?>">
+		</input>
+	<?php } ?>
+
 	<div class="row">
 		<div class="col-md-3">
 			<input
