@@ -1,6 +1,8 @@
 <script src="./js/course_list.js"></script>
 
 <?php
+	// test comment
+
 	// include delete confirm modal
 	require_once('./includes/inc_delete_confirm.php');
 
