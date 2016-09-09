@@ -19,6 +19,7 @@
     <!-- Linked Stylesheets -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="/bootstrap/scripts/DataTables-1.10.7/media/css/jquery.dataTables.css" rel="stylesheet">
     <link href="../css/navbar-custom1.css" rel="stylesheet">
     <link href="../css/master.css" rel="stylesheet">
     <link href="./css/main.css" rel="stylesheet">
@@ -30,6 +31,7 @@
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
     <script src="/bootstrap/js/jquery-validation-1.15.0/dist/additional-methods.min.js"></script>
+    <script src="/bootstrap/scripts/DataTables-1.10.7/media/js/jquery.datatables.js"></script>
     <script src="../../js/bootstrap-datepicker.min.js"></script>
     <script src="../../js/bootstrap-confirmation.js"></script>
     <script src="./js/main.js"></script>
