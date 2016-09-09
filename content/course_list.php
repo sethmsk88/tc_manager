@@ -7,7 +7,7 @@
 	// Get active events that are newer than one week in the past
 	$sel_events_sql = "
 		SELECT EventID, EventDate, Name, TimeBegin, TimeEnd, Location,
-			Instructor, InstructorTitle, Description
+			Instructor, InstructorTitle, Description, Listserv
 		FROM hrodt.tc_event
 		WHERE Active = 1
 			AND EVENTDate > NOW() - INTERVAL 1 week
@@ -19,7 +19,7 @@
 	} else {
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($eid, $date, $courseName, $timeBegin, $timeEnd, $location, $instructor, $instructorTitle, $descr);
+		$stmt->bind_result($eid, $date, $courseName, $timeBegin, $timeEnd, $location, $instructor, $instructorTitle, $descr, $listserv);
 	}
 ?>
 
@@ -33,8 +33,8 @@
 			<th>Location</th>
 			<th>Instructor</th>
 			<th>Instructor Title</th>
-			<th>Description</th>
-			<th></th>
+			<th>Listserv</th>
+			<th><!-- intentionally left blank --></th>
 		</tr>
 		<?php
 			// Iterate through events result set
@@ -54,7 +54,14 @@
 			<td><?= $location ?></td>
 			<td><?= $instructor ?></td>
 			<td><?= $instructorTitle ?></td>
-			<td><?= $descr ?></td>			
+			<td style="font-size: 1.35em;">
+				<?php
+					if ($listserv == 1)
+						echo '<span class="glyphicon glyphicon-ok text-success"></span>';
+					else
+						echo '<span class="glyphicon glyphicon-remove text-danger"></span>';
+				?>
+			</td>			
 			<td class="nowrap">
 				<button
 					type="button"
