@@ -1,3 +1,9 @@
+// Swap element's class1 for class2
+function swapClass($el, class1, class2) {
+	$el.toggleClass(class1);
+	$el.toggleClass(class2);
+}
+
 $(document).ready(function() {
 
 	// Activate data table
@@ -11,17 +17,25 @@ $(document).ready(function() {
 
 	// Intercept Date sort event and apply sort to hidden column
 	// Remove previously assigned click events for this object
-	$('#dateCol').off("click");	
-	$('#dateCol').click(function(e) {
+	$dateCol = $('#dateCol');
+	$dateCol.off("click");	
+	$dateCol.click(function(e) {
 		// apply sort to hidden date column
 		$('#dateSort').trigger("click");
 
-		// show appropriate sorting symbol by toggling the correct class
-		// need to figure out how to see if it's asc/desc
-	});
+		console.log($dateCol.attr("class"));
 
-	$('#dateSort').click(function(e) {
-		console.log("dateSort clicked");
+		// show appropriate sorting symbol by toggling the correct class
+		if ($dateCol.hasClass('sorting')) {
+			$dateCol.removeClass('sorting');
+			$dateCol.addClass('sorting_asc');
+		} else if ($dateCol.hasClass('sorting_desc')) {
+			$dateCol.removeClass('sorting_desc');
+			$dateCol.addClass('sorting_asc');
+		} else if ($dateCol.hasClass('sorting_asc')) {
+			$dateCol.removeClass('sorting_asc');
+			$dateCol.addClass('sorting_desc');
+		}
 	});
 
 	$('.action-btn').click(function(e) {
